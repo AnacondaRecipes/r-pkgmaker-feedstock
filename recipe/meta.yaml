@@ -14,14 +14,21 @@ source:
     - https://cran.r-project.org/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
   sha256: 19ad78c16bd5757333e7abbd5eebcec081deb494c9a4b6eec6919a3747b3386f
 
-build:
-  number: 0
-  skip: true  # [win32]
 
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  # If this is a new build for the same version, increment the build number.
+  number: 0
+
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
 
+# Suggests: devtools (>= 0.8), bibtex, RUnit, testthat, knitr, ReportingTools, hwriter, argparse
 requirements:
   build:
     - r-base
@@ -41,14 +48,20 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('pkgmaker')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('pkgmaker')"           # [not win]
     - "\"%R%\" -e \"library('pkgmaker')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: https://renozao.github.io/pkgmaker
   license: GPL (>= 2)
-  summary: |
-    This package provides some low-level utilities to use for package development. It
+  summary: This package provides some low-level utilities to use for package development. It
     currently provides managers for multiple package specific options and registries,
     vignette, unit test and bibtex related utilities. It serves as a base package for
     packages like NMF, RcppOctave, doRNG, and as an incubator package for other general
@@ -60,3 +73,33 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: pkgmaker
+# Type: Package
+# Title: Package development utilities
+# Version: 0.22
+# Date: 2013-09-17
+# Author: Renaud Gaujoux
+# Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>
+# Description: This package provides some low-level utilities to use for package development. It currently provides managers for multiple package specific options and registries, vignette, unit test and bibtex related utilities. It serves as a base package for packages like NMF, RcppOctave, doRNG, and as an incubator package for other general purposes utilities, that will eventually be packaged separately. It is still under heavy development and changes in the interface(s) are more than likely to happen.
+# License: GPL (>= 2)
+# URL: https://renozao.github.io/pkgmaker
+# BugReports: http://github.com/renozao/pkgmaker/issues
+# SCM: github:renozao, r-forge
+# LazyLoad: yes
+# Depends: R (>= 3.0.0), stats, registry
+# Imports: methods, tools, codetools, digest, stringr, xtable, grDevices
+# Suggests: devtools (>= 0.8), bibtex, RUnit, testthat, knitr, ReportingTools, hwriter, argparse
+# Collate: 'utils.R' 'logging.R' 'unitTests.R' 'data.R' 'namespace.R' 'devutils.R' 'package.R' 'options.R' 'is.R' 'registry.R' 'bibtex.R' 'packages.R' 'vignette.R' 'files.R' 'package-extra.R' 'colors.R' 'graphics.R' 'rd.R' 'project.R' 'CLI.R' 'knitr.R' 'repositories.R'
+# VignetteBuilder: knitr
+# Packaged: 2014-05-14 11:49:09 UTC; renaud
+# NeedsCompilation: no
+# Repository: CRAN
+# Date/Publication: 2014-05-14 16:18:51
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml

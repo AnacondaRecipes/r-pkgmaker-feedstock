@@ -10,8 +10,8 @@ package:
 source:
   fn: pkgmaker_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/pkgmaker_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/pkgmaker_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
   sha256: 19ad78c16bd5757333e7abbd5eebcec081deb494c9a4b6eec6919a3747b3386f
 
 
